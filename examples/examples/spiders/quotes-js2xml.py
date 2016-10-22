@@ -18,3 +18,7 @@ class QuotesJs2XmlSpider(scrapy.Spider):
                 ).extract_first(),
                 'tags': quote.xpath('./property[@name="tags"]//string/text()').extract(),
             }
+
+        next_page_url = response.css("li.next > a::attr(href)").extract_first()
+        if next_page_url is not None:
+            yield scrapy.Request(response.urljoin(next_page_url))
