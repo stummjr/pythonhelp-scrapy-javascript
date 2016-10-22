@@ -20,6 +20,6 @@ class QuotesSeleniumDownloaderSpider(scrapy.Spider):
 
         next_page_url = response.css("li.next > a::attr(href)").extract_first()
         if next_page_url is not None:
-            yield scrapy.Request(response.urljoin(next_page_url))
             # To disable Selenium for a specific request, just pass a meta argument:
             # yield scrapy.Request(response.urljoin(next_page_url), meta={'nojs': 1})
+            yield scrapy.Request(response.urljoin(next_page_url))
